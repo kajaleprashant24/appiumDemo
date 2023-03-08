@@ -90,10 +90,10 @@ https://app-automate.browserstack.com/builds/5588ec75aaf125a939defce0acbf2ea0bc2
 
     // Android execution on Browserstack
 
-    ```Logs
-npm run android.browserstack.app                                                                                                                           
+   ```bash
+  npm run android.browserstack.app                                                                                                                           
 
-> appium-test-project@0.0.1 android.browserstack.app /Users/prashantkajale/coupa/workspace/try/mobileAuto/appium
+> appium-test-project@0.0.1 android.browserstack.app /Users/prashantkajale/mobileAuto/appium
 > wdio ./config/browserstack/wdio.android.bs.app.conf.ts
 
 2023-03-08T19:05:56.236Z WARN @wdio/config:ConfigParser: pattern ./tests/specs/**/app.biometric.login.spec.js did not match any file
@@ -457,6 +457,9 @@ Spec Files:	 1 passed, 1 total (100% completed) in 00:00:35
 2023-03-08T19:06:31.942Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
 2023-03-08T19:06:31.942Z INFO @wdio/local-runner: shutting down
 ```
+
+
+
 
 
 
