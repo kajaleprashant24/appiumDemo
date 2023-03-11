@@ -9,17 +9,20 @@ class HomeScreen extends AppScreen {
   /**
    * here conditional locators so same code will run againt Android nd ios
    */
+
   get title() {
     return $(
       driver.isAndroid
         ? "id=com.example.imagegallery:id/action_bar"
-        : "~Image Gallery"
+        : "~MyFlickr.PhotosView"
     );
   }
 
   get searchInput() {
     return $(
-      driver.isAndroid ? "id=com.example.imagegallery:id/edt_search" : ""
+      driver.isAndroid
+        ? "id=com.example.imagegallery:id/edt_search"
+        : "~Search here..."
     );
   }
 
@@ -36,17 +39,29 @@ class HomeScreen extends AppScreen {
   }
 
   /**
+   *  Trigger search
+   */
+
+  async triggerSearch() {
+    driver.isAndroid ? driver.sendKeyEvent("66") : (await $("~Search")).click();
+  }
+
+  /**
    *  search image in gallery
    */
   async searchImage(searchString: string) {
     await this.searchInput.waitForDisplayed({ timeout: DEFAULT_TIMEOUT });
     await (await this.searchInput).click();
     await (await this.searchInput).sendKeys([searchString]);
-    driver.sendKeyEvent("66"); // trigger enter event
-    await this.searchGallery.waitForDisplayed({ timeout: DEFAULT_TIMEOUT });
-    const images = await this.searchImages;
+    await this.triggerSearch();
 
-    await images.waitForDisplayed();
+    // Search works only with android app.
+    //on IOS search does not work so this below is skipped for ios
+    if (driver.isAndroid) {
+      await this.searchGallery.waitForDisplayed({ timeout: DEFAULT_TIMEOUT });
+      const images = await this.searchImages;
+      await images.waitForDisplayed();
+    }
   }
 
   /**
@@ -55,11 +70,14 @@ class HomeScreen extends AppScreen {
 
   async getSearchResultsTitles() {
     let titles = [];
-    const imageTitles = await this.searchImagesTitles;
-    await imageTitles[0].waitForDisplayed();
-    for (const img of imageTitles) {
-      const txt = await img.getText();
-      titles.push(txt);
+    //Search does not result in any item on IOS so skipping that
+    if (driver.isAndroid) {
+      const imageTitles = await this.searchImagesTitles;
+      await imageTitles[0].waitForDisplayed();
+      for (const img of imageTitles) {
+        const txt = await img.getText();
+        titles.push(txt);
+      }
     }
     return titles;
   }
