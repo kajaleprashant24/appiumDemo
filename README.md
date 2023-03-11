@@ -84,7 +84,10 @@ $ npm run android.browserstack.app
 ```
 
 ### Sample Exetion demo Video Link: 
+#### Android : 
 https://app-automate.browserstack.com/builds/5588ec75aaf125a939defce0acbf2ea0bc259fc5/sessions/e7c768410fdf264b8244be751e86bb1d00ed9124?auth_token=5bf63eab4e39914fe5c553d94f81eed1c6ac2da4b3cde0dda58fc8f827da5246
+
+#### IOS: https://watch.screencastify.com/v/UTHM1pb2gzd4ROt9JJeH
 
 ### Sample browserstack logs
 
