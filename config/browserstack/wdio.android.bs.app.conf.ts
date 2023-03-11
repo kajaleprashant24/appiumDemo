@@ -28,7 +28,7 @@ config.capabilities = [
   {
     build: "android",
     name: "wdio-test",
-    app: "bs://f76be93426663c8a1c02d4b40e71ee4f170ab5ee",  // change this to app from browserstack account
+    app: "bs://ed475b38103f01e87877e152098c98819d0db962",  // change this to app from browserstack account
     device: "Google Pixel 3",
     os_version: "9.0",
   },
