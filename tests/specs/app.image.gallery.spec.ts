@@ -1,6 +1,7 @@
 import HomeScreen from "../screenobjects/HomeScreen";
 
 describe("WebdriverIO and Appium, when interacting with a photo gallery app,", () => {
+  const flag = driver.isAndroid ? true : false;
   before(() => {
     console.log("Starting test");
   });
@@ -10,7 +11,7 @@ describe("WebdriverIO and Appium, when interacting with a photo gallery app,", (
   });
 
   it("should be able search images in photo gallery successfully", async () => {
-    await HomeScreen.waitForIsShown(true);
+    await HomeScreen.waitForIsShown(flag);
 
     // verift titke is displayed
     const tiltleElement = await HomeScreen.title;
