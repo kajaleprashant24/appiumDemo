@@ -18,6 +18,9 @@ class HomeScreen extends AppScreen {
     );
   }
 
+  /**
+   * search input
+   */
   get searchInput() {
     return $(
       driver.isAndroid
@@ -36,6 +39,19 @@ class HomeScreen extends AppScreen {
 
   get searchImagesTitles() {
     return $$("id=com.example.imagegallery:id/txt_title");
+  }
+
+  //Visible only on IOS
+  get cancelLink() {
+    return $(`~Cancel`);
+  }
+
+  get welcomeMessage() {
+    return $(
+      driver.isAndroid
+        ? ""
+        : "~Welcome to MyFlickr. Start searching your wish..!"
+    );
   }
 
   /**
@@ -80,6 +96,36 @@ class HomeScreen extends AppScreen {
       }
     }
     return titles;
+  }
+
+  /**
+   * Clear input field
+   */
+  async clearInput() {
+    if (!driver.isAndroid) {
+      const link = await this.cancelLink;
+      await link.waitForDisplayed({ timeout: DEFAULT_TIMEOUT });
+      await link.click();
+    }
+  }
+
+  /**
+   * 
+   * @returns Get value of search input
+   */
+  async getSearchInputValue() {
+    const input = await this.searchInput;
+    return await input.getValue();
+  }
+
+  /**
+   * validate welcome message
+   */
+  async validateWelcomeMessage() {
+    if (!driver.isAndroid) {
+      const welcomeMessage = await this.welcomeMessage;
+      await welcomeMessage.waitForDisplayed({ timeout: DEFAULT_TIMEOUT });
+    }
   }
 }
 
